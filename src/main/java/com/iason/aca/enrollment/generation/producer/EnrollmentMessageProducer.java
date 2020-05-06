@@ -30,6 +30,6 @@ public class EnrollmentMessageProducer {
     public void sendEnrollment(Enrollment enrollment) throws JsonProcessingException {
         String enrollmentString = objectMapper.writeValueAsString(enrollment);
         kafkaTemplate.send("enrollments",enrollmentString);
-        log.info("Enrollment Produced: " + enrollment.getSourceFileName());
+        log.info("Enrollment Produced and sent: " + enrollment.getSourceFileName());
     }
 }
