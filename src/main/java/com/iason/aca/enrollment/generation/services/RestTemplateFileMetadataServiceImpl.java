@@ -41,6 +41,7 @@ public class RestTemplateFileMetadataServiceImpl implements IFileMetadataService
     public FileMetadata sendFileMetadata() throws JsonProcessingException {
         FileMetadata fileMetadata = FileMetadata.builder()
                 .sourceFileName(generateFileName())
+                .fileStatus("RECEIVED")
                 .fileReceivedDateTime(OffsetDateTime.now()).build();
         String fileAsString = objectMapper.writeValueAsString(fileMetadata);
         HttpHeaders headers = new HttpHeaders();
