@@ -1,6 +1,5 @@
 package com.iason.aca.enrollment.generation.domain;
 
-import com.iason.aca.enrollment.generation.domain.envelope.ISA;
 import lombok.*;
 
 import java.time.OffsetDateTime;
@@ -8,19 +7,21 @@ import java.time.OffsetDateTime;
 /**
  * Created by IntelliJ IDEA
  * User: Balaji Varadharajan
- * Class/Interface/Enum Name: Enrollment
+ * Class/Interface/Enum Name: FileMetadata
  * Inside the package - com.iason.aca.enrollment.generation.domain
- * Created Date: 5/5/2020
- * Created Time: 6:27 PM
+ * Created Date: 5/6/2020
+ * Created Time: 8:43 PM
  **/
 @Setter
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Enrollment {
+public class FileMetadata {
 
-    private FileMetadata fileMetadata;
+    private String fileId;
 
-    private ISA isa;
+    private String sourceFileName;
+
+    private OffsetDateTime fileReceivedDateTime;
 }
