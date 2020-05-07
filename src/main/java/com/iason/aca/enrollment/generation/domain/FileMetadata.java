@@ -24,4 +24,6 @@ public class FileMetadata {
     private String sourceFileName;
 
     private OffsetDateTime fileReceivedDateTime;
+
+    private String fileStatus;
 }
