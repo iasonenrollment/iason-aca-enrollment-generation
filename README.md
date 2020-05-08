@@ -4,3 +4,7 @@
 # Microservices Architecture of IASON Enrollment Product
 
 ![](images/iason-architecture.png)
+
+#### Activity Diagram ####
+
+![](images/activity-diagram.png)
