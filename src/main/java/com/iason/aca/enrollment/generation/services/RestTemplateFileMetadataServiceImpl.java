@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA
@@ -41,6 +42,7 @@ public class RestTemplateFileMetadataServiceImpl implements IFileMetadataService
     public FileMetadata sendFileMetadata() throws JsonProcessingException {
         FileMetadata fileMetadata = FileMetadata.builder()
                 .sourceFileName(generateFileName())
+                .sourceFileId(UUID.randomUUID())
                 .fileStatus("RECEIVED")
                 .fileReceivedDateTime(OffsetDateTime.now()).build();
         String fileAsString = objectMapper.writeValueAsString(fileMetadata);
