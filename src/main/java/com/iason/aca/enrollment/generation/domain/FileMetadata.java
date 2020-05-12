@@ -3,6 +3,7 @@ package com.iason.aca.enrollment.generation.domain;
 import lombok.*;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA
@@ -20,6 +21,8 @@ import java.time.OffsetDateTime;
 public class FileMetadata {
 
     private String fileId;
+
+    private UUID sourceFileId;
 
     private String sourceFileName;
 
