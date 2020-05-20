@@ -3,7 +3,7 @@ package com.iason.aca.enrollment.generation.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iason.aca.enrollment.generation.domain.Enrollment;
 import com.iason.aca.enrollment.generation.domain.FileMetadata;
-import com.iason.aca.enrollment.generation.domain.envelope.ISA;
+import com.iason.aca.enrollment.generation.domain.segments.ISA;
 import com.iason.aca.enrollment.generation.producer.EnrollmentMessageProducer;
 import com.iason.aca.enrollment.generation.util.IasonUtils;
 import org.springframework.stereotype.Service;

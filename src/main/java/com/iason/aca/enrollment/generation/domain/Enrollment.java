@@ -1,9 +1,8 @@
 package com.iason.aca.enrollment.generation.domain;
 
-import com.iason.aca.enrollment.generation.domain.envelope.ISA;
+import com.iason.aca.enrollment.generation.domain.segments.IEA;
+import com.iason.aca.enrollment.generation.domain.segments.ISA;
 import lombok.*;
-
-import java.time.OffsetDateTime;
 
 /**
  * Created by IntelliJ IDEA
@@ -23,4 +22,6 @@ public class Enrollment {
     private FileMetadata fileMetadata;
 
     private ISA isa;
+
+    private IEA iea;
 }
