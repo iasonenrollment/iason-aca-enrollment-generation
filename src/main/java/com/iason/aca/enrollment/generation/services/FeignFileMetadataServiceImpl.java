@@ -1,14 +1,11 @@
 package com.iason.aca.enrollment.generation.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iason.aca.enrollment.generation.domain.FileMetadata;
 import com.iason.aca.enrollment.generation.util.IasonUtils;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.RestTemplate;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -19,36 +16,27 @@ import java.util.UUID;
 /**
  * Created by IntelliJ IDEA
  * User: Balaji Varadharajan
- * Class/Interface/Enum Name: RestImplFileMetadataService
+ * Class/Interface/Enum Name: FeignFileMetadataServiceImpl
  * Inside the package - com.iason.aca.enrollment.generation.services
- * Created Date: 5/7/2020
- * Created Time: 9:21 AM
+ * Created Date: 5/19/2020
+ * Created Time: 3:30 PM
  **/
-//@Service
-public class RestTemplateFileMetadataServiceImpl implements IFileMetadataService{
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class FeignFileMetadataServiceImpl implements IFileMetadataService{
 
-    private RestTemplate restTemplate;
-
-    private ObjectMapper objectMapper;
-
-    public RestTemplateFileMetadataServiceImpl(RestTemplateBuilder builder, ObjectMapper objectMapper){
-        this.restTemplate = builder.build();
-        this.objectMapper = objectMapper;
-    }
+    private final FileMetadataFeignClient feignClient;
 
     @Override
     public FileMetadata sendFileMetadata() throws JsonProcessingException {
+        log.info("Running from Feign Client");
         FileMetadata fileMetadata = FileMetadata.builder()
                 .sourceFileName(generateFileName())
                 .sourceFileId(UUID.randomUUID())
                 .fileStatus("RECEIVED")
                 .fileReceivedDateTime(OffsetDateTime.now()).build();
-        String fileAsString = objectMapper.writeValueAsString(fileMetadata);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request =
-                new HttpEntity<String>(fileAsString, headers);
-        String fileId = restTemplate.postForObject("http://localhost:8081/files", request, String.class);
+        String fileId = feignClient.postFileMetaData(fileMetadata);
         fileMetadata.setFileId(fileId);
         return fileMetadata;
     }
@@ -62,5 +50,4 @@ public class RestTemplateFileMetadataServiceImpl implements IFileMetadataService
         String fileName = "HIOS-"+hiosId+"-"+formattedDate+"-"+timeinMillis+".edi";
         return fileName;
     }
-
 }
