@@ -7,5 +7,5 @@ spring:
     config:
       discovery:
         service-id: iason-config-server
-    profiles:
-      active: dev
+  profiles:
+    active: dev
